@@ -1,0 +1,59 @@
+{
+  "vox_version": "0.3.0",
+  "id": "b3e4f5a6-7c8d-4e9f-a0b1-c2d3e4f5a6b7",
+  "created": "2026-02-21T00:00:00Z",
+  "voice": {
+    "name": "NARRATOR",
+    "description": "Male, 40s, British. Rich baritone with theatrical training. Measured delivery with subtle warmth.",
+    "language": "en-GB",
+    "gender": "male",
+    "age_range": [40, 50],
+    "tags": ["narrator", "baritone", "british", "theatrical"]
+  },
+  "reference_audio": [
+    {
+      "file": "reference/universal-sample.wav",
+      "transcript": "The story begins on a cold November morning.",
+      "language": "en-GB",
+      "duration_seconds": 3.5,
+      "context": "Universal reference clip, usable by any engine."
+    },
+    {
+      "file": "reference/qwen3-0.6b-sample.wav",
+      "transcript": "He paused at the threshold, considering his options.",
+      "language": "en-GB",
+      "duration_seconds": 4.1,
+      "model": "Qwen/Qwen3-TTS-12Hz-0.6B",
+      "engine": "qwen3-tts",
+      "context": "Model-generated sample optimized for 0.6B model quality matching."
+    }
+  ],
+  "embeddings": {
+    "qwen3-tts-0.6b": {
+      "model": "Qwen/Qwen3-TTS-12Hz-0.6B",
+      "engine": "qwen3-tts",
+      "file": "embeddings/qwen3-tts/0.6b/clone-prompt.bin",
+      "format": "bin",
+      "description": "Clone prompt for lightweight 0.6B model"
+    },
+    "qwen3-tts-1.7b": {
+      "model": "Qwen/Qwen3-TTS-12Hz-1.7B",
+      "engine": "qwen3-tts",
+      "file": "embeddings/qwen3-tts/1.7b/clone-prompt.bin",
+      "format": "bin",
+      "description": "Clone prompt for full-quality 1.7B model"
+    }
+  },
+  "provenance": {
+    "method": "synthesized",
+    "engine": "qwen3-tts-voicedesign",
+    "consent": null,
+    "license": "CC0-1.0",
+    "notes": "Multi-model example demonstrating per-model reference audio and embeddings for both 0.6B and 1.7B model variants."
+  },
+  "extensions": {
+    "qwen3-tts": {
+      "design_instruct": "A rich British baritone with theatrical training and measured delivery."
+    }
+  }
+}

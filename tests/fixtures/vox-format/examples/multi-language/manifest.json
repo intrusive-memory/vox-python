@@ -1,0 +1,73 @@
+{
+  "vox_version": "0.4.0",
+  "id": "c4f5a6b7-8d9e-4f0a-b1c2-d3e4f5a6b7c8",
+  "created": "2026-06-08T00:00:00Z",
+  "voice": {
+    "name": "POLYGLOT",
+    "description": "Gender-neutral, 30s. Warm, even-toned announcer voice designed for multilingual narration. Clear articulation with a neutral, broadcast-friendly cadence.",
+    "language": "en-US",
+    "gender": "neutral",
+    "age_range": [30, 40],
+    "tags": ["announcer", "multilingual", "neutral", "designed"]
+  },
+  "embeddings": {
+    "qwen3-tts-0.6b": {
+      "model": "Qwen/Qwen3-TTS-12Hz-0.6B",
+      "engine": "qwen3-tts",
+      "file": "embeddings/qwen3-tts/0.6b/clone-prompt.bin",
+      "format": "bin",
+      "description": "Default (language-neutral) clone prompt for the 0.6B model"
+    },
+    "qwen3-tts-0.6b-sample-audio": {
+      "model": "Qwen/Qwen3-TTS-12Hz-0.6B",
+      "engine": "qwen3-tts",
+      "file": "embeddings/qwen3-tts/0.6b/sample-audio.wav",
+      "format": "wav",
+      "description": "Default (language-neutral) sample audio for the 0.6B model"
+    },
+    "qwen3-tts-0.6b-es-clone-prompt": {
+      "model": "Qwen/Qwen3-TTS-12Hz-0.6B",
+      "engine": "qwen3-tts",
+      "file": "embeddings/qwen3-tts/0.6b/es/clone-prompt.bin",
+      "format": "bin",
+      "description": "Spanish clone prompt for the 0.6B model",
+      "language": "es"
+    },
+    "qwen3-tts-0.6b-es-sample-audio": {
+      "model": "Qwen/Qwen3-TTS-12Hz-0.6B",
+      "engine": "qwen3-tts",
+      "file": "embeddings/qwen3-tts/0.6b/es/sample-audio.wav",
+      "format": "wav",
+      "description": "Spanish sample audio for the 0.6B model",
+      "language": "es"
+    },
+    "qwen3-tts-0.6b-fr-FR-clone-prompt": {
+      "model": "Qwen/Qwen3-TTS-12Hz-0.6B",
+      "engine": "qwen3-tts",
+      "file": "embeddings/qwen3-tts/0.6b/fr-FR/clone-prompt.bin",
+      "format": "bin",
+      "description": "French (France) clone prompt for the 0.6B model",
+      "language": "fr-FR"
+    },
+    "qwen3-tts-0.6b-fr-FR-sample-audio": {
+      "model": "Qwen/Qwen3-TTS-12Hz-0.6B",
+      "engine": "qwen3-tts",
+      "file": "embeddings/qwen3-tts/0.6b/fr-FR/sample-audio.wav",
+      "format": "wav",
+      "description": "French (France) sample audio for the 0.6B model",
+      "language": "fr-FR"
+    }
+  },
+  "provenance": {
+    "method": "synthesized",
+    "engine": "qwen3-tts-voicedesign",
+    "consent": null,
+    "license": "CC0-1.0",
+    "notes": "Designed (no real person) voice demonstrating v0.4.0 optional per-language samples and clone prompts: a default/language-neutral pair plus Spanish (es) and French-France (fr-FR) variants for the same 0.6B model. A reader requesting (0.6b, 'es') resolves the Spanish pair; (0.6b, 'de') falls back to the default; (0.6b, 'es-MX') falls back to the base 'es'."
+  },
+  "extensions": {
+    "qwen3-tts": {
+      "design_instruct": "A warm, neutral, broadcast-friendly multilingual announcer with clear articulation."
+    }
+  }
+}

@@ -1,0 +1,59 @@
+[
+  {
+    "file": "narrators/audiobook.vox",
+    "name": "Audiobook Narrator",
+    "description": "Warm, engaging voice for long-form audiobook narration. Rich mid-range with clear articulation and subtle emotional variation.",
+    "tags": ["narrator", "audiobook", "long-form", "warm", "engaging", "neutral-accent"],
+    "language": "en",
+    "gender": "neutral",
+    "category": "narrator"
+  },
+  {
+    "file": "narrators/documentary.vox",
+    "name": "Documentary Narrator",
+    "description": "Authoritative, clear voice for educational and documentary content. Crisp enunciation with commanding presence and BBC-influenced precision.",
+    "tags": ["narrator", "documentary", "educational", "authoritative", "clear", "professional"],
+    "language": "en",
+    "gender": "neutral",
+    "category": "narrator"
+  },
+  {
+    "file": "narrators/storytelling.vox",
+    "name": "Storytelling Narrator",
+    "description": "Expressive, dynamic voice for theatrical storytelling and dramatic readings. Wide pitch range with excellent character differentiation.",
+    "tags": ["narrator", "storytelling", "expressive", "theatrical", "dynamic", "dramatic"],
+    "language": "en",
+    "gender": "neutral",
+    "category": "narrator"
+  },
+  {
+    "file": "characters/young-protagonist.vox",
+    "name": "Young Protagonist",
+    "description": "Bright, energetic voice embodying youthful optimism and determination. Perfect for coming-of-age stories and heroic young characters.",
+    "tags": ["character", "young", "protagonist", "energetic", "optimistic", "heroic"],
+    "language": "en",
+    "gender": "neutral",
+    "age_range": [16, 24],
+    "category": "character"
+  },
+  {
+    "file": "characters/wise-mentor.vox",
+    "name": "Wise Mentor",
+    "description": "Measured, thoughtful voice carrying experience without weariness. Perfect for advisor characters and guides who impart wisdom.",
+    "tags": ["character", "mentor", "wise", "advisor", "teacher", "experienced"],
+    "language": "en",
+    "gender": "neutral",
+    "age_range": [45, 65],
+    "category": "character"
+  },
+  {
+    "file": "characters/elderly-sage.vox",
+    "name": "Elderly Sage",
+    "description": "Ancient, weathered voice with depth of accumulated wisdom. Perfect for wizards, elders, and keepers of ancient knowledge.",
+    "tags": ["character", "elderly", "sage", "ancient", "wise", "mystical"],
+    "language": "en",
+    "gender": "neutral",
+    "age_range": [70, 90],
+    "category": "character"
+  }
+]

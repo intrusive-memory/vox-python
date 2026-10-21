@@ -1,0 +1,322 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/intrusive-memory/vox-format/schemas/manifest-v0.3.0.json",
+  "title": "VOX Manifest",
+  "description": "JSON Schema for the VOX voice identity manifest file (v0.3.0). Adds per-model reference audio tagging and ethical provenance rules for cloned voices.",
+  "type": "object",
+  "required": ["vox_version", "id", "created", "voice"],
+  "additionalProperties": true,
+  "properties": {
+    "vox_version": {
+      "type": "string",
+      "description": "Semantic version of the VOX format specification.",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "examples": ["0.3.0"]
+    },
+    "id": {
+      "type": "string",
+      "description": "Unique identifier for this voice identity (UUID v4).",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "examples": ["ad7aa7d7-570d-4f9e-99da-1bd14b99cc78"]
+    },
+    "created": {
+      "type": "string",
+      "description": "ISO 8601 timestamp of when this voice identity was created.",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(Z|[+-]\\d{2}:\\d{2})$",
+      "examples": ["2026-02-13T12:00:00Z", "2026-02-13T12:00:00+05:30"]
+    },
+    "voice": {
+      "type": "object",
+      "description": "Core voice identity metadata.",
+      "required": ["name", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Display name for the voice.",
+          "minLength": 1,
+          "examples": ["Narrator", "PROTAGONIST"]
+        },
+        "description": {
+          "type": "string",
+          "description": "Natural language description of the voice characteristics, suitable for voice design engines.",
+          "minLength": 10,
+          "examples": ["A warm, clear narrator voice with neutral accent suitable for audiobooks and documentaries."]
+        },
+        "language": {
+          "type": "string",
+          "description": "Primary language of the voice in BCP 47 format (e.g., en-US, en-GB, fr-FR).",
+          "examples": ["en-US", "en-GB", "fr-FR"]
+        },
+        "gender": {
+          "type": "string",
+          "description": "Gender presentation of the voice.",
+          "enum": ["male", "female", "nonbinary", "neutral"]
+        },
+        "age_range": {
+          "type": "array",
+          "description": "Approximate age range as [minimum, maximum].",
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "minItems": 2,
+          "maxItems": 2,
+          "examples": [[28, 35], [45, 55]]
+        },
+        "tags": {
+          "type": "array",
+          "description": "Searchable tags describing voice characteristics.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "examples": [["narrator", "authoritative", "theatrical"]]
+        }
+      }
+    },
+    "prosody": {
+      "type": "object",
+      "description": "Prosodic preferences describing the voice's natural speaking style.",
+      "additionalProperties": false,
+      "properties": {
+        "pitch_base": {
+          "type": "string",
+          "description": "Base pitch level (e.g., low, medium, high).",
+          "examples": ["low", "medium", "high"]
+        },
+        "pitch_range": {
+          "type": "string",
+          "description": "Pitch variation range (e.g., narrow, moderate, wide).",
+          "examples": ["narrow", "moderate", "wide"]
+        },
+        "rate": {
+          "type": "string",
+          "description": "Speaking rate (e.g., slow, moderate, fast).",
+          "examples": ["slow", "moderate", "fast"]
+        },
+        "energy": {
+          "type": "string",
+          "description": "Overall energy or intensity level (e.g., low, medium, high).",
+          "examples": ["low", "medium", "high"]
+        },
+        "emotion_default": {
+          "type": "string",
+          "description": "Default emotional tone when no specific emotion is requested.",
+          "examples": ["calm authority", "friendly professionalism"]
+        }
+      }
+    },
+    "reference_audio": {
+      "type": "array",
+      "description": "Reference audio clips used for voice cloning or style matching. Clips may optionally be tagged with a model and engine.",
+      "items": {
+        "type": "object",
+        "required": ["file", "transcript"],
+        "additionalProperties": false,
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Path to the audio file within the .vox archive (relative to archive root).",
+            "minLength": 1,
+            "examples": ["reference/sample-01.wav"]
+          },
+          "transcript": {
+            "type": "string",
+            "description": "Verbatim transcript of the audio clip.",
+            "minLength": 1,
+            "examples": ["The quick brown fox jumps over the lazy dog."]
+          },
+          "language": {
+            "type": "string",
+            "description": "Language of the audio clip in BCP 47 format.",
+            "examples": ["en-US"]
+          },
+          "duration_seconds": {
+            "type": "number",
+            "description": "Duration of the audio clip in seconds.",
+            "minimum": 0,
+            "examples": [4.2]
+          },
+          "context": {
+            "type": "string",
+            "description": "Contextual note about the audio clip (e.g., recording conditions, emotional tone).",
+            "examples": ["Calm narration, studio recording"]
+          },
+          "model": {
+            "type": "string",
+            "description": "Model identifier this clip was produced by or intended for. Should match an embeddings entry's model value.",
+            "examples": ["Qwen/Qwen3-TTS-12Hz-1.7B"]
+          },
+          "engine": {
+            "type": "string",
+            "description": "Engine namespace for this clip (e.g., 'qwen3-tts').",
+            "examples": ["qwen3-tts"]
+          }
+        }
+      }
+    },
+    "character": {
+      "type": "object",
+      "description": "Character context for screenplay-aware voice casting.",
+      "additionalProperties": false,
+      "properties": {
+        "role": {
+          "type": "string",
+          "description": "Description of the character's role in the narrative.",
+          "examples": ["Omniscient narrator. Provides historical and emotional context."]
+        },
+        "emotional_range": {
+          "type": "array",
+          "description": "Range of emotions the character expresses.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "examples": [["contemplative", "melancholic", "wry", "compassionate", "stern"]]
+        },
+        "relationships": {
+          "type": "object",
+          "description": "Character relationships mapped as character name to relationship description.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "examples": [{"PROTAGONIST": "Observer and chronicler."}]
+        },
+        "source": {
+          "type": "object",
+          "description": "Source material reference for the character.",
+          "additionalProperties": false,
+          "properties": {
+            "work": {
+              "type": "string",
+              "description": "Title of the source work.",
+              "examples": ["The Chronicle"]
+            },
+            "format": {
+              "type": "string",
+              "description": "Format of the source material (e.g., fountain, screenplay, novel).",
+              "examples": ["fountain", "screenplay"]
+            },
+            "file": {
+              "type": "string",
+              "description": "Path to the source file.",
+              "examples": ["episodes/chronicle-episode-01.fountain"]
+            }
+          }
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "description": "Provenance tracking for voice origin and consent.",
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "How the voice was created.",
+          "enum": ["designed", "synthesized", "cloned", "preset", "hybrid"]
+        },
+        "engine": {
+          "type": "string",
+          "description": "TTS engine or tool used to create the voice.",
+          "examples": ["qwen3-tts-voicedesign-1.7b", "multi-platform"]
+        },
+        "consent": {
+          "description": "Consent status for voice cloning. Null for designed voices (no person involved).",
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["self", "granted", "unknown"]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "license": {
+          "type": "string",
+          "description": "License under which the voice is distributed.",
+          "examples": ["CC0-1.0", "CC-BY-4.0"]
+        },
+        "notes": {
+          "type": "string",
+          "description": "Additional notes about voice provenance.",
+          "examples": ["Voice designed from character description for screenplay production."]
+        },
+        "source": {
+          "type": "array",
+          "description": "Archive-relative paths to source audio files used for cloning. Required when method is 'cloned'.",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1,
+          "examples": [["reference/source-recording-01.wav", "reference/source-recording-02.wav"]]
+        }
+      },
+      "if": {
+        "properties": {
+          "method": { "const": "cloned" }
+        },
+        "required": ["method"]
+      },
+      "then": {
+        "required": ["source", "consent"],
+        "properties": {
+          "consent": {
+            "type": "string",
+            "enum": ["self", "granted"]
+          },
+          "source": {
+            "minItems": 1
+          }
+        }
+      }
+    },
+    "embeddings": {
+      "type": "object",
+      "description": "Structured embedding metadata mapping identifiers to model/file metadata. Each key is a human-readable identifier (e.g., 'qwen3-tts-0.6b') and the value describes the model, file path, and optional metadata.",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["model", "file"],
+        "additionalProperties": false,
+        "properties": {
+          "model": {
+            "type": "string",
+            "description": "Fully qualified model identifier (e.g., 'Qwen/Qwen3-TTS-12Hz-0.6B').",
+            "minLength": 1,
+            "examples": ["Qwen/Qwen3-TTS-12Hz-0.6B", "Qwen/Qwen3-TTS-12Hz-1.7B"]
+          },
+          "engine": {
+            "type": "string",
+            "description": "Engine namespace this embedding belongs to (e.g., 'qwen3-tts'). Links to extensions section.",
+            "examples": ["qwen3-tts", "coqui"]
+          },
+          "file": {
+            "type": "string",
+            "description": "Archive-relative path to the embedding binary file. Must start with 'embeddings/'.",
+            "pattern": "^embeddings/",
+            "minLength": 1,
+            "examples": ["embeddings/qwen3-tts/0.6b/clone-prompt.bin"]
+          },
+          "format": {
+            "type": "string",
+            "description": "Binary format hint (e.g., 'bin', 'safetensors', 'onnx').",
+            "examples": ["bin", "safetensors", "onnx"]
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable note about this embedding.",
+            "examples": ["Clone prompt for lightweight 0.6B model"]
+          }
+        }
+      }
+    },
+    "extensions": {
+      "type": "object",
+      "description": "Engine-specific extension data. Each key is a provider namespace. Reserved provider IDs: apple, elevenlabs, qwen3-tts, openai, coqui, parler, google, azure, mlx-audio. Extensions may reference binary files stored in the embeddings/ directory within the .vox archive.",
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "vox_version": "0.1.0",
+  "id": "ad7aa7d7-570d-4f9e-99da-1bd14b99cc78",
+  "created": "2026-02-13T12:00:00Z",
+  "voice": {
+    "name": "Test Voice",
+    "description": "This manifest has an invalid age_range with three elements instead of two, and uses a string instead of an integer.",
+    "age_range": [55, "old", 30]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "vox_version": "0.1.0",
+  "id": "ad7aa7d7-570d-4f9e-99da-1bd14b99cc78",
+  "created": "February 13, 2026",
+  "voice": {
+    "name": "Test Voice",
+    "description": "This manifest has an invalid ISO 8601 timestamp in the created field."
+  }
+}

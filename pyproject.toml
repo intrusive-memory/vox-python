@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voxformat"
+version = "0.4.0"
+description = "Python reference implementation of the VOX voice-identity file format (tracks the Swift VoxFormat library)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "CC0-1.0" }
+authors = [{ name = "intrusive-memory" }]
+dependencies = []
+
+[project.optional-dependencies]
+jsonschema = ["jsonschema>=4.18"]
+test = ["pytest>=7"]
+dev = ["pytest>=7", "jsonschema>=4.18"]
+
+[project.scripts]
+voxpy = "voxformat.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+voxformat = ["schemas/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

@@ -1,0 +1,40 @@
+{
+  "vox_version": "0.3.0",
+  "id": "e1a2b3c4-d5e6-4f7a-8b9c-0d1e2f3a4b5c",
+  "created": "2026-02-23T00:00:00Z",
+  "voice": {
+    "name": "VOICE_ACTOR",
+    "description": "Female, 30s, American. Clear mezzo-soprano with warm conversational tone and slight Pacific Northwest accent. Natural and expressive, suitable for audiobook narration and character work.",
+    "language": "en-US",
+    "gender": "female",
+    "age_range": [28, 35],
+    "tags": ["mezzo-soprano", "conversational", "warm", "expressive", "american"]
+  },
+  "reference_audio": [
+    {
+      "file": "reference/source-recording-01.wav",
+      "transcript": "The rain fell softly on the cedar trees outside my window.",
+      "language": "en-US",
+      "duration_seconds": 4.5,
+      "context": "Original voice recording used as clone source. Studio quality."
+    },
+    {
+      "file": "reference/source-recording-02.wav",
+      "transcript": "I remember the summer we spent at the lake house, watching fireflies at dusk.",
+      "language": "en-US",
+      "duration_seconds": 5.2,
+      "context": "Original voice recording used as clone source. Studio quality."
+    }
+  ],
+  "provenance": {
+    "method": "cloned",
+    "engine": "coqui-xtts-v2",
+    "consent": "self",
+    "source": [
+      "reference/source-recording-01.wav",
+      "reference/source-recording-02.wav"
+    ],
+    "license": "CC-BY-4.0",
+    "notes": "Voice cloned from the creator's own recordings with full consent. Source recordings are bundled in the archive for traceability."
+  }
+}

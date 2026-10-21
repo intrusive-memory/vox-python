@@ -1,0 +1,41 @@
+{
+  "vox_version": "0.1.0",
+  "id": "7ca7b257-e94a-43ae-adae-c60116fb8a8a",
+  "created": "2026-02-13T12:00:00Z",
+  "voice": {
+    "name": "VERSATILE",
+    "description": "Male, 30s, American. Versatile voice suitable for multiple genres: conversational, professional, warm and engaging. Medium pitch with clear articulation and neutral Midwest accent.",
+    "language": "en-US",
+    "gender": "male",
+    "age_range": [28, 35],
+    "tags": ["versatile", "professional", "conversational", "neutral"]
+  },
+  "prosody": {
+    "pitch_base": "medium",
+    "pitch_range": "moderate",
+    "rate": "medium",
+    "energy": "medium",
+    "emotion_default": "friendly professionalism"
+  },
+  "extensions": {
+    "apple": {
+      "voice_id": "en-US/Aaron",
+      "fallback": true
+    },
+    "elevenlabs": {
+      "voice_id": "vid-example-abc123",
+      "model_id": "eleven_multilingual_v2"
+    },
+    "qwen3-tts": {
+      "model": "Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign",
+      "design_instruct": "A versatile American male voice in his 30s, medium pitch, clear and professional with warm conversational tone."
+    }
+  },
+  "provenance": {
+    "method": "designed",
+    "engine": "multi-platform",
+    "consent": null,
+    "license": "CC0-1.0",
+    "notes": "Vendor-neutral voice designed for cross-platform compatibility. All extension data uses placeholder values."
+  }
+}

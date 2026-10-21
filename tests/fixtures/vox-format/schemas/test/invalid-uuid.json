@@ -1,0 +1,9 @@
+{
+  "vox_version": "0.1.0",
+  "id": "not-a-valid-uuid",
+  "created": "2026-02-13T12:00:00Z",
+  "voice": {
+    "name": "Test Voice",
+    "description": "This manifest has an invalid UUID format in the id field."
+  }
+}

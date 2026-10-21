@@ -1,0 +1,40 @@
+{
+  "vox_version": "0.1.0",
+  "id": "cccb2a22-1d46-440f-bb8e-9fb93963e199",
+  "created": "2026-02-13T12:00:00Z",
+  "voice": {
+    "name": "NARRATOR",
+    "description": "Male, 40s-50s, British. Rich baritone with theatrical training. Measured, authoritative delivery with subtle warmth. RP accent with precise diction suitable for literary narration.",
+    "language": "en-GB",
+    "gender": "male",
+    "age_range": [45, 55],
+    "tags": ["narrator", "authoritative", "theatrical", "literary", "british"]
+  },
+  "prosody": {
+    "pitch_base": "low",
+    "pitch_range": "moderate",
+    "rate": "moderate",
+    "energy": "medium",
+    "emotion_default": "calm authority"
+  },
+  "character": {
+    "role": "Omniscient narrator. Provides historical and emotional context, guides the audience through the story's moral complexities.",
+    "emotional_range": ["contemplative", "melancholic", "wry", "compassionate", "stern"],
+    "relationships": {
+      "PROTAGONIST": "Observer and chronicler, maintains emotional distance while showing deep understanding.",
+      "ANTAGONIST": "Critical but fair, reveals complexity beneath surface judgments."
+    },
+    "source": {
+      "work": "The Chronicle",
+      "format": "fountain",
+      "file": "episodes/chronicle-episode-01.fountain"
+    }
+  },
+  "provenance": {
+    "method": "designed",
+    "engine": "qwen3-tts-voicedesign-1.7b",
+    "consent": null,
+    "license": "CC0-1.0",
+    "notes": "Voice designed from character description for screenplay production. Not cloned from a real person."
+  }
+}
