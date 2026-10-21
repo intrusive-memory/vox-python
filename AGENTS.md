@@ -132,11 +132,39 @@ Gemini specifics (verified against the live API, 2026-10):
 - `voices.get` returns the original prompt and an exact `expire_time`. There is no PATCH.
 - Recreating from `prompted_input` (`voxpy gemini update`) gives a **new id and a different-sounding
   voice**. Treat it as a last resort after expiry or a project change.
-- The stored Gemini sample can't recreate the voice inside Gemini: replication requires a consent
-  recording by the real human speaker, which a designed voice doesn't have. Don't fake one.
-  For an offline fallback, clone the sample into a local engine (e.g. Qwen3-TTS Base from the sample
-  + its transcript) and store that as a normal `qwen3-tts` clone prompt in the same `.vox`. Set
-  `provenance.source` to the Gemini sample. Check Google's terms on reusing generated audio first.
+- Stored voices are per Google project: max **200 per project** (designed + replicated combined),
+  1-year TTL. A key from a different project is not expected to resolve the id (inferred from the
+  docs; not yet tested). Any number of keys from the *same* project, on any machine, work.
+
+### Google terms: recreating a voice from its stored sample
+
+Read 2026-10. Not legal advice; re-check the linked pages before relying on this.
+
+**Sample → Gemini replicated voice: not permitted.** The
+[voice replication docs](https://ai.google.dev/gemini-api/docs/voice-replication) require "two real
+human audio recordings from the same adult speaker", and the consent audio must recite *"I am the
+owner of this voice and I consent to Google using this voice to create a synthetic voice model."*
+A designed voice's sample is not a real person's recording, and no one can truthfully make that
+statement for it. **Never synthesize or fake a consent recording.**
+
+**Sample → local clone (e.g. Qwen3-TTS Base): no explicit prohibition, but a gray area.**
+- [Gemini API Additional Terms](https://ai.google.dev/gemini-api/terms) (effective 2026-03-23):
+  *"Google won't claim ownership over that content."*
+- Same terms: *"You may not use the Services to develop models that compete with the Services."*
+  Conditioning an existing open model on one clip is not training a model, so a one-off clone
+  probably falls outside this.
+- Same terms: *"You also may not attempt to reverse engineer, extract or replicate any component of
+  the Services."* A **systematic** pipeline that converts Gemini-designed voices into permanent
+  local copies so the Gemini voices can be deleted is the use this clause most plausibly targets.
+- [Generative AI Prohibited Use Policy](https://policies.google.com/terms/generative-ai/use-policy)
+  has no voice-cloning rule; it bars deceptive impersonation of real people and misrepresenting AI
+  provenance. Keep `provenance` honest (set `provenance.source` to the Gemini sample) and this is met.
+
+**Guidance for agents:** an occasional local fallback for a single voice is low risk. Do not build
+"design in Gemini, keep in a local engine" as a bulk pipeline without a legal review or written OK
+from Google. For permanent, portable voices at scale, design them natively in a local engine
+(e.g. Qwen3-TTS VoiceDesign) so no Google output is involved, and treat Gemini as one more engine
+to render with.
 
 ## 5. Validate and play
 
